@@ -15,7 +15,8 @@ enum UserRole {
 model User {
   id            String          @id @default(cuid())
   name          String?
-  email         String          @unique
+  email         String?         @unique
+  password      String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -73,7 +74,6 @@ model VerificationToken {
   @@id([identifier, token])
 }
 
-// Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
   userId               String

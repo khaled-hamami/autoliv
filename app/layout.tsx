@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Link from "next/link";
 import { Toaster } from "@/components/ui/toaster";
-
+import AuthSessionProvider from "./providers/authsessionProvider";
+import {Navbar} from "@/components/navbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,30 +29,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="bg-white shadow-md">
-          <nav className="container mx-auto px-6 py-3">
-            <div className="flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold text-gray-800">
-                Autoliv
-              </Link>
-              
-              <Tabs defaultValue="home">
-                <TabsList>
-                  <Link href="/">
-                    <TabsTrigger value="home">Home</TabsTrigger>
-                  </Link>
-                  <Link href="/login">
-                    <TabsTrigger value="login">Login</TabsTrigger>
-                  </Link>
-                  <Link href="/preview">
-                    <TabsTrigger value="preview">View</TabsTrigger>
-                  </Link>
-                </TabsList>
-              </Tabs>
-            </div>
-          </nav>
-        </header>
-        {children}
+        <Navbar />
+        <AuthSessionProvider>{children}</AuthSessionProvider>
         <Toaster />
       </body>
     </html>

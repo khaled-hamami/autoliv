@@ -5,7 +5,8 @@ CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'USER');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT,
-    "email" TEXT NOT NULL,
+    "email" TEXT,
+    "password" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
     "role" "UserRole" DEFAULT 'USER',
@@ -13,6 +14,15 @@ CREATE TABLE "User" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "References" (
+    "id" SERIAL NOT NULL,
+    "ref" TEXT NOT NULL,
+    "refPeinture" TEXT NOT NULL,
+
+    CONSTRAINT "References_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

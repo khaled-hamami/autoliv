@@ -104,7 +104,6 @@ export default function References() {
     <div className="container mx-auto px-6 py-16">
       <h1 className="text-3xl font-bold mb-6">References</h1>
 
-      {/* Add new reference form */}
       <form onSubmit={handleAddReference} className="mb-8 space-y-4">
         <div className="flex space-x-4">
           <div className="flex-1">
@@ -151,7 +150,6 @@ export default function References() {
           </SelectContent>
         </Select>
 
-        {/* Display selected reference and delete button */}
         {selectedReference && (
           <div className="flex items-center justify-between p-4 border rounded">
             <div>
