@@ -70,3 +70,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+/* Add this CSS to your stylesheet */
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}

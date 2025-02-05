@@ -4,7 +4,7 @@ import { encode as defaultEncode } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { prisma } from "./prisma";
+import { prisma } from "@/prisma";
 import { schema } from "./schemas/login";
 
 const adapter = PrismaAdapter(prisma);

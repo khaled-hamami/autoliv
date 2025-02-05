@@ -48,7 +48,6 @@ const deleteReference = async (id: number) => {
 export default function References() {
   useEffect(() => {
     const fetchReferences = async () => {
-      console.log("Fetching references from database");
       const response = await fetch("/api/getReferences");
       const data = await response.json();
       setReferences(data);
@@ -69,16 +68,15 @@ export default function References() {
     if (!newRef || !newRefPeinture) {
       toast.toast({
         variant: "destructive",
-        title: "error",
-        description: "Please fill out both fields",
+        title: "erreur",
+        description: "Veuillez remplir les deux champs",
       });
       return;
     }
     addReference(newRef, newRefPeinture).then((data) => {
-      console.log("Added new reference:", data);
       toast.toast({
-        title: "Success",
-        description: "Reference added successfully",
+        title: "Succès",
+        description: "Référence ajoutée avec succès",
       });
       setReferences([...(references || []), data]);
     });
@@ -91,13 +89,12 @@ export default function References() {
     deleteReference(id).then((data) => {
       console.log("Deleted reference:", data);
       toast.toast({
-        title: "Success",
-        description: "Reference deleted successfully",
+        title: "Succès",
+        description: "Référence supprimée avec succès",
       });
       setReferences(references?.filter((ref) => ref.id !== id));
       setSelectedReference(null);
     });
-    console.log("Deleting reference with id:", id);
   };
 
   return (
@@ -107,25 +104,25 @@ export default function References() {
       <form onSubmit={handleAddReference} className="mb-8 space-y-4">
         <div className="flex space-x-4">
           <div className="flex-1">
-            <Label htmlFor="newRef">New Reference</Label>
+            <Label htmlFor="newRef">Nouvelle référence</Label>
             <Input
               id="newRef"
               value={newRef}
               onChange={(e) => setNewRef(e.target.value)}
-              placeholder="Enter new reference"
+              placeholder="Entrer une nouvelle référence"
             />
           </div>
           <div className="flex-1">
-            <Label htmlFor="newRefPeinture">New Ref Peinture</Label>
+            <Label htmlFor="newRefPeinture">Nouvelle Ref Peinture</Label>
             <Input
               id="newRefPeinture"
               value={newRefPeinture}
               onChange={(e) => setNewRefPeinture(e.target.value)}
-              placeholder="Enter new ref peinture"
+              placeholder="Entrez une nouvelle référence peinture"
             />
           </div>
         </div>
-        <Button type="submit">Add Reference</Button>
+        <Button type="submit">Ajouter une référence</Button>
       </form>
 
       {/* Dropdown list */}
@@ -139,7 +136,7 @@ export default function References() {
           }
         >
           <SelectTrigger>
-            <SelectValue placeholder="Select a reference" />
+            <SelectValue placeholder="Sélectionnez une référence" />
           </SelectTrigger>
           <SelectContent>
             {references?.map((ref) => (
