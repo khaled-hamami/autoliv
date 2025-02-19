@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { executeAction } from "@/lib/executeAction";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { auth, signIn } from "@/auth";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { executeAction } from "@/lib/executeAction"
+import Link from "next/link"
+import { redirect } from "next/navigation"
+import { auth, signIn } from "@/auth"
 
 const Page = async () => {
-  const session = await auth();
-  if (session) redirect("/");
+  const session = await auth()
+  if (session) redirect("/")
 
   return (
     <div className="h-screen flex items-center justify-center">
@@ -29,12 +29,12 @@ const Page = async () => {
         <form
           className="space-y-4"
           action={async (formData) => {
-            "use server";
+            "use server"
             await executeAction({
               actionFn: async () => {
-                await signIn("credentials", formData);
+                await signIn("credentials", formData)
               },
-            });
+            })
           }}
         >
           <Input
@@ -57,13 +57,15 @@ const Page = async () => {
         </form>
 
         <div className="text-center">
-          <Button asChild variant="link">
-            <Link href="/sign-up">Don&apos;t have an account? Sign up</Link>
+          <Button asChild variant="link" className="text-black">
+            <Link href="/sign-up">
+              Don&apos;t have an account? Sign up
+            </Link>
           </Button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

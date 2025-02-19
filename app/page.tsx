@@ -6,7 +6,7 @@ export default function Home() {
     <div className="container mx-auto px-6 py-16">
       <div className="flex flex-col md:flex-row items-center">
         <div className="md:w-1/2">
-          <h1 className="text-4xl font-bold mb-6">Bienvenue chez Autoliv</h1>
+          <h1 className="text-4xl font-bold mb-6 text-primary">Bienvenue chez Autoliv</h1>
           <p className="text-xl mb-8">
             Votre source fiable pour des pièces automobiles de haute qualité.
             Améliorez les performances et la sécurité de votre véhicule avec nos

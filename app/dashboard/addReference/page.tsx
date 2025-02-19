@@ -1,25 +1,26 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Trash2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+} from "@/components/ui/select"
+import { Trash2 } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 type Reference = {
-  id: number;
-  ref: string;
-  refPeinture: string;
-};
-import { useEffect } from "react";
+  id: number
+  ref: string
+  refPeinture: string
+}
+import { useEffect } from "react"
+import { getSession, useSession } from "next-auth/react"
 
 const addReference = async (ref: string, refPeinture: string) => {
   const response = await fetch("/api/addReference", {
@@ -28,10 +29,10 @@ const addReference = async (ref: string, refPeinture: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ ref, refPeinture }),
-  });
-  const data = await response.json();
-  return data;
-};
+  })
+  const data = await response.json()
+  return data
+}
 
 const deleteReference = async (id: number) => {
   const response = await fetch("/api/deleteReference/", {
@@ -40,65 +41,72 @@ const deleteReference = async (id: number) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
-  });
-  const data = await response.json();
-  return data;
-};
+  })
+  const data = await response.json()
+  return data
+}
 
 export default function References() {
   useEffect(() => {
+    getSession()
+  }, [])
+  useEffect(() => {
     const fetchReferences = async () => {
-      const response = await fetch("/api/getReferences");
-      const data = await response.json();
-      setReferences(data);
-    };
-    fetchReferences();
-  }, []);
+      const response = await fetch("/api/getReferences")
+      const data = await response.json()
+      setReferences(data)
+    }
+    fetchReferences()
+  }, [])
 
-  const toast = useToast();
-  const [references, setReferences] = useState<Reference[]>();
-  const [newRef, setNewRef] = useState("");
-  const [newRefPeinture, setNewRefPeinture] = useState("");
+  const toast = useToast()
+  const [references, setReferences] = useState<Reference[]>()
+  const [newRef, setNewRef] = useState("")
+  const [newRefPeinture, setNewRefPeinture] = useState("")
   const [selectedReference, setSelectedReference] = useState<Reference | null>(
     null
-  );
+  )
 
   const handleAddReference = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!newRef || !newRefPeinture) {
       toast.toast({
         variant: "destructive",
         title: "erreur",
         description: "Veuillez remplir les deux champs",
-      });
-      return;
+      })
+      return
     }
     addReference(newRef, newRefPeinture).then((data) => {
       toast.toast({
         title: "Succès",
         description: "Référence ajoutée avec succès",
-      });
-      setReferences([...(references || []), data]);
-    });
+      })
+      setReferences([...(references || []), data])
+    })
 
-    setNewRef("");
-    setNewRefPeinture("");
-  };
+    setNewRef("")
+    setNewRefPeinture("")
+  }
 
   const handleDeleteReference = (id: number) => {
     deleteReference(id).then((data) => {
-      console.log("Deleted reference:", data);
+      console.log("Deleted reference:", data)
       toast.toast({
         title: "Succès",
         description: "Référence supprimée avec succès",
-      });
-      setReferences(references?.filter((ref) => ref.id !== id));
-      setSelectedReference(null);
-    });
-  };
+      })
+      setReferences(references?.filter((ref) => ref.id !== id))
+      setSelectedReference(null)
+    })
+  }
 
+  const { data: session } = useSession()
+  if (!session?.user || session?.user.role === "USER") {
+    return <div>Non autorisé</div>
+  }
   return (
-    <div className="container mx-auto px-6 py-16">
+    <div className="container mx-auto px-6 py-16 ml-64">
       <h1 className="text-3xl font-bold mb-6">References</h1>
 
       <form onSubmit={handleAddReference} className="mb-8 space-y-4">
@@ -168,5 +176,5 @@ export default function References() {
         )}
       </div>
     </div>
-  );
+  )
 }

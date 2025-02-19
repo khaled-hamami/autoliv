@@ -56,7 +56,7 @@ const Page = async () => {
         </form>
 
         <div className="text-center">
-          <Button asChild variant="link">
+          <Button asChild variant="link" className="text-black">
             <Link href="/sign-in">Already have an account? Sign in</Link>
           </Button>
         </div>
