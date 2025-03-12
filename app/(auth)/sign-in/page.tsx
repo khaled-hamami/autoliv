@@ -12,7 +12,7 @@ const Page = async () => {
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="w-full max-w-sm mx-auto space-y-6 p-16 shadow-lg bg-white rounded-lg">
-        <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Se connecter</h1>
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -46,20 +46,20 @@ const Page = async () => {
           />
           <Input
             name="password"
-            placeholder="Password"
+            placeholder="Mot de passe"
             type="password"
             required
             autoComplete="current-password"
           />
           <Button className="w-full" type="submit">
-            Sign In
+            Se connecter
           </Button>
         </form>
 
         <div className="text-center">
           <Button asChild variant="link" className="text-black">
             <Link href="/sign-up">
-              Don&apos;t have an account? Sign up
+              Je n&apos;ai pas un compte? Créer un compte
             </Link>
           </Button>
         </div>

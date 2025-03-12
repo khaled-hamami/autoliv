@@ -57,6 +57,8 @@ export default function DayPage() {
 
   useEffect(() => {
     const fetchDay = async () => {
+      if (!id) return // Ensure id is defined
+
       const response = await fetch("/api/amc/getAmcByDate", {
         method: "POST",
         headers: {
@@ -66,9 +68,24 @@ export default function DayPage() {
       })
       const data = await response.json()
 
-      setAMCAState(data?.amca || [])
-      setAMCBState(data?.amcb || [])
-      setAMCCState(data?.amcc || [])
+      // Calculate yesterday's date
+      const currentDate = new Date(id as string)
+      const yesterdayDate = new Date(currentDate)
+      yesterdayDate.setDate(currentDate.getDate() - 1)
+      const formattedYesterdayDate = yesterdayDate.toISOString().split("T")[0]
+
+      const yesterday = await fetch("/api/amc/getAmcByDate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ date: formattedYesterdayDate }),
+      })
+      const yesterdayData = await yesterday.json()
+
+      setAMCAState(data?.amca || yesterdayData?.amca || [])
+      setAMCBState(data?.amcb || yesterdayData?.amcb || [])
+      setAMCCState(data?.amcc || yesterdayData?.amcc || [])
     }
 
     if (id) {

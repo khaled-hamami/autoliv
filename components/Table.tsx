@@ -50,6 +50,7 @@ export default function Table({
   setCabStates: React.Dispatch<React.SetStateAction<CabState[]>>
   from: "planification" | "dashboard"
 }) {
+  console.log(cabStates)
   /******************* DEBUG ******************/
   // useEffect(() => {
   //   console.log("debug", cabStates)
@@ -115,7 +116,7 @@ export default function Table({
     setOpenDialogs(openDialogs.map((open, i) => (i === index ? false : open)))
   }
   const { data: session } = useSession()
-  const isLoggedIn = session && session?.user
+  // const isLoggedIn = session && session?.user
   // const isAdmin = session && session?.user && session?.user?.role === "ADMIN"
 
   useEffect(() => {
@@ -203,7 +204,7 @@ export default function Table({
                         <HoverCardTrigger className="w-full">
                           <Select
                             value={cabStates[index].RefActuel}
-                            disabled={!isLoggedIn}
+                            disabled={from === "planification"}
                             onValueChange={(value) => {
                               const selectedRef = DATA.find(
                                 (ref) => ref.ref === value
@@ -266,7 +267,7 @@ export default function Table({
                     >
                       <div className="flex items-center justify-center h-full w-6 mx-auto">
                         <Select
-                          disabled={!isLoggedIn}
+                          disabled={from === "planification"}
                           value={cabStates[index].Time} // Set the value prop to the current Time value
                           onValueChange={(value) => {
                             const newCabStates = cabStates.map((state, i) => {
@@ -362,7 +363,7 @@ export default function Table({
                         <HoverCardTrigger className="w-full">
                           <Select
                             value={cabStates[index].Changement}
-                            disabled={!isLoggedIn}
+                            disabled={from === "planification"}
                             onValueChange={(value) => {
                               const selectedRef = DATA.find(
                                 (ref) => ref.ref === value
@@ -530,7 +531,7 @@ export default function Table({
                         <HoverCardTrigger className="w-full">
                           <Select
                             value={cabStates[index + 8].RefActuel}
-                            disabled={!isLoggedIn}
+                            disabled={from === "planification"}
                             onValueChange={(value) => {
                               const selectedRef = DATA.find(
                                 (ref) => ref.ref === value
@@ -591,7 +592,7 @@ export default function Table({
                     >
                       <div className="flex items-center justify-center h-full w-6 mx-auto">
                         <Select
-                          disabled={!isLoggedIn}
+                          disabled={from === "planification"}
                           value={cabStates[index + 8].Time} // Set the value prop to the current Time value
                           onValueChange={(value) => {
                             const newCabStates = cabStates.map((state, i) => {
@@ -683,7 +684,7 @@ export default function Table({
                         <HoverCardTrigger className="w-full">
                           <Select
                             value={cabStates[index + 8].Changement}
-                            disabled={!isLoggedIn}
+                            disabled={from === "planification"}
                             onValueChange={(value) => {
                               const selectedRef = DATA.find(
                                 (ref) => ref.ref === value

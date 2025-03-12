@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     (session.user.role !== "VERIFIEDUSER" && session.user.role !== "ADMIN")
   ) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 403 })
-  }
+  }   
 
   const { date, amc, typeAmc } = await req.json()
 

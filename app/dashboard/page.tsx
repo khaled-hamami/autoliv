@@ -1,7 +1,15 @@
 import { auth } from "@/auth"
 import { prisma } from "@/prisma"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default async function Page() {
   const session = await auth()
@@ -46,6 +54,13 @@ export default async function Page() {
               <CardContent>
                 <p className="text-3xl font-bold">{dbSize}</p>
               </CardContent>
+              <CardFooter>
+                <form action="/api/amc/deleteAmc" method="post">
+                  <Button variant="destructive" type="submit">
+                    <Link href="/dashboard">nettoyer la base de données</Link>
+                  </Button>
+                </form>
+              </CardFooter>
             </Card>
           </div>
           <Card className="w-full max-h-[390px]">
