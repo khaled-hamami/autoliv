@@ -60,6 +60,11 @@ export default async function Page() {
                     <Link href="/dashboard">nettoyer la base de données</Link>
                   </Button>
                 </form>
+                {/* <form action="/api/amc/downloadAllData" method="get">
+                  <Button type="submit">
+                    Télécharger toutes les données
+                  </Button>
+                </form> */}
               </CardFooter>
             </Card>
           </div>

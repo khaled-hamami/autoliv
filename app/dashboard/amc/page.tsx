@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { format, addDays } from "date-fns"
+import { fr } from "date-fns/locale"
 import { getSession, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
@@ -29,7 +30,7 @@ export default function Amc() {
       // Change to include today
       const date = addDays(new Date(), i)
       days.push({
-        dayName: format(date, "EEEE"),
+        dayName: format(date, "EEEE", { locale: fr }),
         date: format(date, "yyyy-MM-dd"),
       })
     }

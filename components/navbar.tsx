@@ -14,6 +14,10 @@ export const Navbar = async () => {
           <Link href="/" className="text-4xl font- font-bold text-primary">
             Autoliv
           </Link>
+          <div className="text-4xl text-primary font-bold">
+          planification &nbsp;&nbsp;
+             {format(new Date(), "dd/MM/yyyy")}
+          </div>
           <div className="flex space-x-4">
             <Link href="/">
               <button className="font-bold text-lg hover:underline">
